@@ -1,12 +1,13 @@
 import http from "./httpHeader";
+import { TimestampData } from "./dataService.d";
 
 class CigarettesDataService {
   getData(userId: string) {
     return http.get(`/data?userId=${userId}`);
   }
 
-  sendTimestamp(timestamp: number) {
-    return http.put(`/data`, timestamp);
+  sendTimestamp(timestampData: TimestampData) {
+    return http.post(`/data`, timestampData);
   }
 }
 

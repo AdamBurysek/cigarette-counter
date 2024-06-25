@@ -12,6 +12,11 @@ import CigarettesDataService from "../../services/dataService";
 
 const STATUS_BAR_HEIGHT = StatusBar.currentHeight;
 
+interface TimestampData {
+  userId: string;
+  timestamp: string;
+}
+
 export default function TabOneScreen() {
   const [cigarettes, setCigarettes] = useState<number>(0);
   const [data, setData] = useState<any[]>([]);
@@ -33,6 +38,11 @@ export default function TabOneScreen() {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
     console.log(user?.id);
     console.log(Date.now());
+    const newTimestamp: TimestampData = {
+      userId: user?.id!,
+      timestamp: Date.now().toString(),
+    };
+    CigarettesDataService.sendTimestamp(newTimestamp);
   };
 
   return (
