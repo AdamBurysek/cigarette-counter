@@ -5,16 +5,28 @@ import {
   GestureHandlerRootView,
   TouchableOpacity,
 } from "react-native-gesture-handler";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as Haptics from "expo-haptics";
 import { useUser } from "@clerk/clerk-expo";
+import CigarettesDataService from "../../services/dataService";
 
 const STATUS_BAR_HEIGHT = StatusBar.currentHeight;
 
 export default function TabOneScreen() {
   const [cigarettes, setCigarettes] = useState<number>(0);
+  const [data, setData] = useState<any[]>([]);
 
   const { user } = useUser();
+
+  useEffect(() => {
+    const getCigarettesData = () => {
+      CigarettesDataService.getData(user?.id!).then((response) =>
+        setData(response.data)
+      );
+    };
+
+    getCigarettesData();
+  }, []);
 
   const handlePlusButtonClick = () => {
     setCigarettes(cigarettes + 1);
@@ -29,7 +41,6 @@ export default function TabOneScreen() {
         <Text style={styles.lastCigarette}>Last Cigarette at 12:34</Text>
         <Text style={styles.lastCigaretteTime}>45min. ago</Text>
       </View>
-
       <Text style={styles.today}>Today</Text>
       <View style={styles.counterBox}>
         <Text style={styles.cigaretteCount}>{cigarettes}</Text>
@@ -38,7 +49,7 @@ export default function TabOneScreen() {
       <View style={styles.statsContainer}>
         <View>
           <Text style={styles.statsDay}>Yesterday</Text>
-          <Text style={styles.statsYesterdayNumber}>21</Text>
+          <Text style={styles.statsYesterdayNumber}>{data.length}</Text>
           <Text style={styles.statsTime}>every ~32min.</Text>
         </View>
         <View>
