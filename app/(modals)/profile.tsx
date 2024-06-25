@@ -95,14 +95,14 @@ const Page = () => {
 
       {user && (
         <View style={styles.card}>
-          <GestureHandlerRootView>
+          {/* <GestureHandlerRootView>
             <TouchableOpacity onPress={onCaptureImage}>
               <Image
                 source={{ uri: user?.imageUrl }}
                 style={styles.avatar}
               ></Image>
             </TouchableOpacity>
-          </GestureHandlerRootView>
+          </GestureHandlerRootView> */}
           <View style={{ flexDirection: "row", gap: 6 }}>
             {edit ? (
               <View style={styles.editRow}>
