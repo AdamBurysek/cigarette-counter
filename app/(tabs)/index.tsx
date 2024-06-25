@@ -7,15 +7,20 @@ import {
 } from "react-native-gesture-handler";
 import { useState } from "react";
 import * as Haptics from "expo-haptics";
+import { useUser } from "@clerk/clerk-expo";
 
 const STATUS_BAR_HEIGHT = StatusBar.currentHeight;
 
 export default function TabOneScreen() {
   const [cigarettes, setCigarettes] = useState<number>(0);
 
+  const { user } = useUser();
+
   const handlePlusButtonClick = () => {
     setCigarettes(cigarettes + 1);
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    console.log(user?.id);
+    console.log(Date.now());
   };
 
   return (
