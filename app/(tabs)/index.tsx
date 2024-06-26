@@ -70,7 +70,6 @@ export default function TabOneScreen() {
     setCigarettes(countTodayTimestamps(data));
     setYesterdayCount(countYesterdayTimestamps(data));
     setTimeSinceLast(updateTimeSinceLast(data));
-    setTodayLeft(leftForToday(dailyCigarettes, cigarettes));
   }, [data]);
 
   useEffect(() => {
@@ -84,6 +83,10 @@ export default function TabOneScreen() {
   useEffect(() => {
     setYesterdayAverage(averageSmokingFrequencyYesterday(yesterdayCount));
   }, [yesterdayCount]);
+
+  useEffect(() => {
+    setTodayLeft(leftForToday(dailyCigarettes, cigarettes));
+  }, [dailyCigarettes, cigarettes]);
 
   useEffect(() => {
     settodayLeftAverage(leftForTodayFrequency(todayLeft));
