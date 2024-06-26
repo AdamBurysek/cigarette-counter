@@ -105,13 +105,29 @@ export default function TabOneScreen() {
       <View style={styles.statsContainer}>
         <View>
           <Text style={styles.statsDay}>Yesterday</Text>
-          <Text style={styles.statsYesterdayNumber}>{yesterdayCount}</Text>
+          <Text
+            style={[
+              styles.statsYesterdayNumber,
+              { color: yesterdayCount > dailyCigarettes ? "red" : "green" },
+            ]}
+          >
+            {yesterdayCount}
+          </Text>
           <Text style={styles.statsTime}>every {yesterdayAverage}</Text>
         </View>
         <View>
           <Text style={styles.statsDay}>Left for today</Text>
-          <Text style={styles.statsTodayNumber}>{todayLeft}</Text>
-          <Text style={styles.statsTime}>every {todayLeftAverage}</Text>
+          <Text
+            style={[
+              styles.statsTodayNumber,
+              { color: todayLeft === 0 ? "red" : "green" },
+            ]}
+          >
+            {todayLeft}
+          </Text>
+          <Text style={styles.statsTime}>
+            {todayLeft === 0 ? "" : `every ${todayLeftAverage}`}
+          </Text>
         </View>
       </View>
       <View style={styles.plusBtnContainer}>
@@ -207,12 +223,10 @@ const styles = StyleSheet.create({
   statsYesterdayNumber: {
     fontFamily: "Roboto-Medium",
     fontSize: 24,
-    color: "red",
   },
   statsTodayNumber: {
     fontFamily: "Roboto-Medium",
     fontSize: 24,
-    color: Colors.green,
   },
   statsTime: { fontFamily: "Roboto-Medium", fontSize: 18, color: Colors.grey },
 });
