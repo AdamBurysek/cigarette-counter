@@ -9,6 +9,15 @@ import { useEffect, useState } from "react";
 import * as Haptics from "expo-haptics";
 import { useUser } from "@clerk/clerk-expo";
 import CigarettesDataService from "../../services/dataService";
+import {
+  averageSmokingFrequencyYesterday,
+  countTodayTimestamps,
+  countYesterdayTimestamps,
+  getLastTimestamp,
+  leftForToday,
+  leftForTodayFrequency,
+  updateTimeSinceLast,
+} from "@/utils/smokingStats";
 
 const STATUS_BAR_HEIGHT = StatusBar.currentHeight;
 
@@ -18,8 +27,20 @@ interface TimestampData {
 }
 
 export default function TabOneScreen() {
-  const [cigarettes, setCigarettes] = useState<number>(0);
-  const [data, setData] = useState<any[]>([]);
+  const [cigarettes, setCigarettes] = useState(0);
+  const [data, setData] = useState<TimestampData[]>([]);
+  const [lastCigaretteTime, setLastCigaretteTime] = useState<string | null>(
+    null
+  );
+  const [yesterdayCount, setYesterdayCount] = useState(0);
+  const [yesterdayAverage, setYesterdayAverage] = useState<string | null>(null);
+  const [timeSinceLast, setTimeSinceLast] = useState<string | null | undefined>(
+    null
+  );
+  const [todayLeft, setTodayLeft] = useState(0);
+  const [todayLeftAverage, settodayLeftAverage] = useState<string | null>(null);
+
+  const dailyCigarettes = 20;
 
   const { user } = useUser();
 
@@ -36,20 +57,45 @@ export default function TabOneScreen() {
   const handlePlusButtonClick = () => {
     setCigarettes(cigarettes + 1);
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-    console.log(user?.id);
-    console.log(Date.now());
     const newTimestamp: TimestampData = {
       userId: user?.id!,
       timestamp: Date.now().toString(),
     };
     CigarettesDataService.sendTimestamp(newTimestamp);
+    setData((prevData) => [...(prevData || []), newTimestamp]);
   };
+
+  useEffect(() => {
+    setLastCigaretteTime(getLastTimestamp(data));
+    setCigarettes(countTodayTimestamps(data));
+    setYesterdayCount(countYesterdayTimestamps(data));
+    setTimeSinceLast(updateTimeSinceLast(data));
+    setTodayLeft(leftForToday(dailyCigarettes, cigarettes));
+  }, [data]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTimeSinceLast(updateTimeSinceLast(data));
+    }, 10000); // Update every minute
+
+    return () => clearInterval(interval); // Cleanup interval on component unmount
+  }, [data, lastCigaretteTime]);
+
+  useEffect(() => {
+    setYesterdayAverage(averageSmokingFrequencyYesterday(yesterdayCount));
+  }, [yesterdayCount]);
+
+  useEffect(() => {
+    settodayLeftAverage(leftForTodayFrequency(todayLeft));
+  }, [todayLeft]);
 
   return (
     <View style={styles.container}>
       <View style={styles.topContainer}>
-        <Text style={styles.lastCigarette}>Last Cigarette at 12:34</Text>
-        <Text style={styles.lastCigaretteTime}>45min. ago</Text>
+        <Text style={styles.lastCigarette}>
+          Last Cigarette at {lastCigaretteTime}
+        </Text>
+        <Text style={styles.lastCigaretteTime}>{timeSinceLast}</Text>
       </View>
       <Text style={styles.today}>Today</Text>
       <View style={styles.counterBox}>
@@ -59,13 +105,13 @@ export default function TabOneScreen() {
       <View style={styles.statsContainer}>
         <View>
           <Text style={styles.statsDay}>Yesterday</Text>
-          <Text style={styles.statsYesterdayNumber}>{data.length}</Text>
-          <Text style={styles.statsTime}>every ~32min.</Text>
+          <Text style={styles.statsYesterdayNumber}>{yesterdayCount}</Text>
+          <Text style={styles.statsTime}>every {yesterdayAverage}</Text>
         </View>
         <View>
           <Text style={styles.statsDay}>Left for today</Text>
-          <Text style={styles.statsTodayNumber}>10</Text>
-          <Text style={styles.statsTime}>every ~42min.</Text>
+          <Text style={styles.statsTodayNumber}>{todayLeft}</Text>
+          <Text style={styles.statsTime}>every {todayLeftAverage}</Text>
         </View>
       </View>
       <View style={styles.plusBtnContainer}>
