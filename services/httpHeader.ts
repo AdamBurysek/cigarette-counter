@@ -1,8 +1,9 @@
 import axios from "axios";
 
+const MONGODB_API = process.env.EXPO_PUBLIC_MONGODB_API;
+
 export default axios.create({
-  baseURL:
-    "https://eu-central-1.aws.data.mongodb-api.com/app/smoking-backend-ftcyvvz/endpoint/",
+  baseURL: MONGODB_API,
   headers: {
     "Content-Type": "application/json",
   },
