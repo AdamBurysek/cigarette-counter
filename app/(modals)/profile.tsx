@@ -133,7 +133,9 @@ const Page = () => {
                 <Text style={{ fontFamily: "Roboto-Bold", fontSize: 22 }}>
                   {firstName} {lastName}
                 </Text>
-                <GestureHandlerRootView>
+                {/* DONT WORK - NEED FIX */}
+
+                {/* <GestureHandlerRootView>
                   <TouchableOpacity onPress={() => setEdit(true)}>
                     <Ionicons
                       name="create-outline"
@@ -141,7 +143,7 @@ const Page = () => {
                       color={Colors.darks}
                     ></Ionicons>
                   </TouchableOpacity>
-                </GestureHandlerRootView>
+                </GestureHandlerRootView> */}
               </View>
             )}
           </View>
