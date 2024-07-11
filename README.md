@@ -2,7 +2,7 @@
 
 ### React Native App
 
-![cigarette-counter](https://github.com/AdamBurysek/cigarette-counter/assets/114564710/c6c84007-2e77-47b9-9dca-09eca79f66a5)
+![cigarette-counter-image](https://github.com/AdamBurysek/cigarette-counter/assets/114564710/c25a1ec4-0bb1-4ee7-b4d5-147c0d7637b7)
 
 #
 
