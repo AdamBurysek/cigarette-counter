@@ -2,6 +2,10 @@
 
 ### React Native App
 
+![cigarette-counter](https://github.com/AdamBurysek/cigarette-counter/assets/114564710/c6c84007-2e77-47b9-9dca-09eca79f66a5)
+
+#
+
 1. Clone the repository: **git clone [https://github.com/AdamBurysek/cigarette-counter]**
 2. Navigate to the project directory: **cd cigarette-counter**
 3. Install dependencies: **npm install**
