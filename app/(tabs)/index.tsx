@@ -75,6 +75,7 @@ export default function TabOneScreen() {
   useEffect(() => {
     const interval = setInterval(() => {
       setTimeSinceLast(updateTimeSinceLast(data));
+      settodayLeftAverage(leftForTodayFrequency(todayLeft));
     }, 10000); // Update every minute
 
     return () => clearInterval(interval); // Cleanup interval on component unmount
