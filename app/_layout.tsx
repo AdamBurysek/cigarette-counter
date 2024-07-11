@@ -7,6 +7,7 @@ import * as SecureStore from "expo-secure-store";
 import { ClerkProvider, useAuth, useUser } from "@clerk/clerk-expo";
 import Colors from "../constants/Colors";
 import { useColorScheme } from "react-native";
+import { View } from "react-native";
 
 const CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
@@ -117,6 +118,7 @@ function RootLayoutNav() {
           headerStyle: {
             backgroundColor: isDarkMode ? Colors.grey : undefined,
           },
+          headerLeft: () => <View></View>,
           headerRight: () => (
             <Link href="/(modals)/profile" asChild>
               <Pressable style={{ marginBottom: 5 }}>
@@ -128,7 +130,6 @@ function RootLayoutNav() {
                     borderRadius: 50,
                     borderWidth: 1,
                     marginEnd: 14,
-
                     borderColor: "grey",
                   }}
                 ></Image>
