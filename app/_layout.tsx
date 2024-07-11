@@ -2,7 +2,7 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { useFonts } from "expo-font";
 import { Link, SplashScreen, Stack, useRouter } from "expo-router";
 import { useEffect } from "react";
-import { Image, Pressable } from "react-native";
+import { Image, Platform, Pressable } from "react-native";
 import * as SecureStore from "expo-secure-store";
 import { ClerkProvider, useAuth, useUser } from "@clerk/clerk-expo";
 import Colors from "../constants/Colors";
@@ -131,6 +131,7 @@ function RootLayoutNav() {
                     borderWidth: 1,
                     marginEnd: 14,
                     borderColor: "grey",
+                    marginTop: Platform.OS === "android" ? 25 : 0,
                   }}
                 ></Image>
               </Pressable>
