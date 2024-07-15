@@ -1,15 +1,7 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  SafeAreaView,
-} from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import React from "react";
 import { useWarmUpBrowser } from "../hooks/useWarmUpBrowser";
-import { defaultStyles } from "../../constants/Styles";
-
-import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useOAuth } from "@clerk/clerk-expo";
 import { useRouter } from "expo-router";
 import Colors from "../../constants/Colors";

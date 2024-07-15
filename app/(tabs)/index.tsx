@@ -1,10 +1,13 @@
 import { FontAwesome } from "@expo/vector-icons";
 import Colors from "../../constants/Colors";
-import { StyleSheet, Text, View, Platform, StatusBar } from "react-native";
 import {
-  GestureHandlerRootView,
+  StyleSheet,
+  Text,
+  View,
+  Platform,
+  StatusBar,
   TouchableOpacity,
-} from "react-native-gesture-handler";
+} from "react-native";
 import { useEffect, useState } from "react";
 import * as Haptics from "expo-haptics";
 import { useUser } from "@clerk/clerk-expo";
@@ -134,14 +137,12 @@ export default function TabOneScreen() {
         </View>
       </View>
       <View style={styles.plusBtnContainer}>
-        <GestureHandlerRootView>
-          <TouchableOpacity
-            style={styles.plusBtn}
-            onPress={handlePlusButtonClick}
-          >
-            <FontAwesome name="plus" size={40} style={styles.plusBtnIcon} />
-          </TouchableOpacity>
-        </GestureHandlerRootView>
+        <TouchableOpacity
+          style={styles.plusBtn}
+          onPress={handlePlusButtonClick}
+        >
+          <FontAwesome name="plus" size={40} style={styles.plusBtnIcon} />
+        </TouchableOpacity>
       </View>
     </View>
   );

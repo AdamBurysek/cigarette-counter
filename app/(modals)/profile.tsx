@@ -5,6 +5,8 @@ import {
   StyleSheet,
   SafeAreaView,
   Image,
+  TouchableOpacity,
+  TextInput,
 } from "react-native";
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import { useAuth, useUser } from "@clerk/clerk-expo";
@@ -12,11 +14,6 @@ import { Link, useNavigation, useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { defaultStyles } from "../../constants/Styles";
 import Colors from "../../constants/Colors";
-import {
-  GestureHandlerRootView,
-  TextInput,
-  TouchableOpacity,
-} from "react-native-gesture-handler";
 import * as ImagePicker from "expo-image-picker";
 
 const Page = () => {
@@ -75,14 +72,12 @@ const Page = () => {
       headerTitle: "",
       headerTransparent: true,
       headerLeft: () => (
-        <GestureHandlerRootView>
-          <TouchableOpacity
-            style={styles.roundButton}
-            onPress={() => navigation.goBack()}
-          >
-            <Ionicons name="chevron-back" size={24} color={"white"} />
-          </TouchableOpacity>
-        </GestureHandlerRootView>
+        <TouchableOpacity
+          style={styles.roundButton}
+          onPress={() => navigation.goBack()}
+        >
+          <Ionicons name="chevron-back" size={24} color={"white"} />
+        </TouchableOpacity>
       ),
     });
   }, []);
@@ -95,14 +90,13 @@ const Page = () => {
 
       {user && (
         <View style={styles.card}>
-          <GestureHandlerRootView>
-            <TouchableOpacity onPress={onCaptureImage}>
-              <Image
-                source={{ uri: user?.imageUrl }}
-                style={styles.avatar}
-              ></Image>
-            </TouchableOpacity>
-          </GestureHandlerRootView>
+          <TouchableOpacity onPress={onCaptureImage}>
+            <Image
+              source={{ uri: user?.imageUrl }}
+              style={styles.avatar}
+            ></Image>
+          </TouchableOpacity>
+
           <View style={{ flexDirection: "row", gap: 6 }}>
             {edit ? (
               <View style={styles.editRow}>
@@ -118,32 +112,27 @@ const Page = () => {
                   onChangeText={setLastName}
                   style={[defaultStyles.inputField, { width: 100 }]}
                 ></TextInput>
-                <GestureHandlerRootView>
-                  <TouchableOpacity onPress={onSaveUser}>
-                    <Ionicons
-                      name="checkmark-outline"
-                      size={24}
-                      color={Colors.darks}
-                    ></Ionicons>
-                  </TouchableOpacity>
-                </GestureHandlerRootView>
+
+                <TouchableOpacity onPress={onSaveUser}>
+                  <Ionicons
+                    name="checkmark-outline"
+                    size={24}
+                    color={Colors.darks}
+                  ></Ionicons>
+                </TouchableOpacity>
               </View>
             ) : (
               <View style={styles.editRow}>
                 <Text style={{ fontFamily: "Roboto-Bold", fontSize: 22 }}>
                   {firstName} {lastName}
                 </Text>
-                {/* DONT WORK - NEED FIX */}
-
-                {/* <GestureHandlerRootView>
-                  <TouchableOpacity onPress={() => setEdit(true)}>
-                    <Ionicons
-                      name="create-outline"
-                      size={24}
-                      color={Colors.darks}
-                    ></Ionicons>
-                  </TouchableOpacity>
-                </GestureHandlerRootView> */}
+                <TouchableOpacity onPress={() => setEdit(true)}>
+                  <Ionicons
+                    name="create-outline"
+                    size={24}
+                    color={Colors.darks}
+                  ></Ionicons>
+                </TouchableOpacity>
               </View>
             )}
           </View>
