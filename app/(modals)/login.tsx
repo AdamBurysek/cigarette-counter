@@ -6,7 +6,6 @@ import {
   SafeAreaView,
 } from "react-native";
 import React from "react";
-import { useWarmUpBrowser } from "../hooks/useWarmUpBrowser";
 import { defaultStyles } from "../../constants/Styles";
 
 import { Ionicons } from "@expo/vector-icons";
@@ -18,8 +17,6 @@ enum Strategy {
 }
 
 const Page = () => {
-  useWarmUpBrowser();
-
   const router = useRouter();
 
   const { startOAuthFlow: googleAuth } = useOAuth({ strategy: "oauth_google" });
