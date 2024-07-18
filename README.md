@@ -2,6 +2,8 @@
 
 ### React Native App
 
+My friend badly wants this app.
+
 ![cigarette-counter-image](https://github.com/AdamBurysek/cigarette-counter/assets/114564710/c25a1ec4-0bb1-4ee7-b4d5-147c0d7637b7)
 
 #
