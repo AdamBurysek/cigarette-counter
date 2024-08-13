@@ -3,10 +3,6 @@ import React from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Colors from "../../constants/Colors";
 
-enum Strategy {
-  Google = "oauth_google",
-}
-
 const Page = () => {
   return (
     <View style={styles.container}>

@@ -21,13 +21,9 @@ import {
   leftForTodayFrequency,
   updateTimeSinceLast,
 } from "@/utils/smokingStats";
+import { TimestampData } from "@/utils/types";
 
 const STATUS_BAR_HEIGHT = StatusBar.currentHeight;
-
-interface TimestampData {
-  userId: string;
-  timestamp: string;
-}
 
 export default function TabOneScreen() {
   const [cigarettes, setCigarettes] = useState(0);

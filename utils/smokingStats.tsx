@@ -1,7 +1,4 @@
-interface TimestampData {
-  userId: string;
-  timestamp: string;
-}
+import { TimestampData } from "./types";
 
 export const getLastTimestamp = (data: TimestampData[]): string | null => {
   if (data.length === 0) return null;

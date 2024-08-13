@@ -1,9 +1,5 @@
 import http from "./httpHeader";
-
-type TimestampData = {
-  userId: string;
-  timestamp: string;
-};
+import { TimestampData } from "../utils/types";
 
 class CigarettesDataService {
   getData(userId: string) {
