@@ -1,5 +1,9 @@
 import http from "./httpHeader";
-import { TimestampData } from "./dataService.d";
+
+type TimestampData = {
+  userId: string;
+  timestamp: string;
+};
 
 class CigarettesDataService {
   getData(userId: string) {
